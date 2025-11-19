@@ -1,15 +1,16 @@
 {
   "name": "sfs-control-tower",
   "version": "1.0.0",
+  "type": "module",
   "description": "SmartFlow Systems Operations Control Center",
   "main": "src/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "health": "node scripts/health.js",
-    "check-repos": "node scripts/check-repos.js",
-    "agent": "node scripts/agent-cli.js"
+    "health": "node scripts/health.cjs",
+    "check-repos": "node scripts/check-repos.cjs",
+    "agent": "node scripts/agent-cli.cjs"
   },
   "keywords": ["smartflow", "control-tower", "dashboard"],
   "author": "boweazy (Gareth)",
