@@ -2,7 +2,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import fs from 'fs/promises';
-
+import rateLimit from 'express-rate-limit';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -137,8 +137,12 @@ app.get('/api/stats', async (req, res) => {
   }
 });
 
-// Fallback to serve React app
-app.get('*', (req, res) => {
+// Fallback to serve React app (rate limited)
+const reactFallbackLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+app.get('*', reactFallbackLimiter, (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
