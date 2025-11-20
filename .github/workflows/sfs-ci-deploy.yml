@@ -1,4 +1,6 @@
 name: SFS Control Tower CI/CD
+permissions:
+  contents: read
 
 on:
   push:
