@@ -30,6 +30,8 @@
     "recharts": "^2.10.3",
     "axios": "^1.6.2",
     "express-rate-limit": "^8.2.1"
+    "@octokit/rest": "^20.0.2",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
