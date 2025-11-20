@@ -90,6 +90,18 @@ The Control Tower exposes a REST API on port 3000:
 ]
 ```
 
+### Agent Action Endpoints (NEW! 🎉)
+
+**One-click automation for all 26 repositories:**
+
+- `POST /api/agents/health-check` - Check health of all repos
+- `POST /api/agents/sync-all` - Git pull latest changes for all repos
+- `POST /api/agents/deploy-all` - Trigger CI/CD workflows via GitHub API
+- `GET /api/agents/logs?limit=N` - View recent git activity across repos
+- `POST /api/agents/fix-issues` - Automated troubleshooting (npm install, git reset, etc.)
+
+**See [AGENT_ACTIONS_GUIDE.md](./AGENT_ACTIONS_GUIDE.md) for full documentation**
+
 ### Agent CLI Commands
 
 ```bash
@@ -264,26 +276,30 @@ Configured for Replit with GitHub Actions CI/CD.
 
 ## Roadmap
 
-### Phase 1 - Dashboard (Current)
+### Phase 1 - Dashboard ✅ COMPLETE
 - [x] Project scaffold
 - [x] Basic UI components
 - [x] Repo health checking
 - [x] Agent CLI interface
-- [ ] API backend
+- [x] API backend
 
-### Phase 2 - Integration
+### Phase 2 - Agent Actions ✅ COMPLETE
 - [x] Real-time repo health monitoring
 - [x] GitHub API integration
 - [x] Issue tracking
 - [x] Workflow status monitoring
-- [ ] Deployment automation
-- [ ] Agent orchestration
+- [x] Deployment automation (via GitHub API)
+- [x] Agent orchestration (health, sync, deploy actions)
+- [x] One-click operations for all 26 repos
+- [x] Comprehensive agent actions API
 
-### Phase 3 - Advanced Features
-- [ ] Analytics dashboard
-- [ ] Alert system
-- [ ] Multi-user support
-- [ ] Advanced automation
+### Phase 3 - Advanced Features (In Progress)
+- [ ] Real-time WebSocket updates
+- [ ] Alert system for failures
+- [ ] Analytics dashboard with charts
+- [ ] Multi-user authentication
+- [ ] Scheduled automation
+- [ ] Custom action scripts
 
 ## Contributing
 
