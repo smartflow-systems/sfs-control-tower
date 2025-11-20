@@ -12,11 +12,22 @@ Your central dashboard for managing all 26 SFS repositories, agents, deployments
 
 ## Features
 
-- 📊 Real-time health monitoring for all repos
-- 🤖 Agent orchestration interface
-- 🚀 One-click deployment triggers
-- 📈 System-wide analytics
-- 🎨 Full SFS brown/black/gold branding
+- 📊 **Real-time health monitoring** for all 26 repos
+- 🔗 **GitHub API integration** with live repo data
+- 📋 **Issue & PR tracking** across all repositories
+- 🚀 **CI/CD status monitoring** via GitHub Actions
+- 🤖 **Agent orchestration interface** for automation
+- 📈 **System-wide analytics** and metrics
+- 🎨 **Full SFS brown/black/gold branding**
+
+### GitHub Integration Features
+- Repository health and status
+- Latest commit information
+- Open issues and pull requests count
+- GitHub Actions workflow status
+- Repository activity metrics
+- Stars, language, and description
+- Last updated timestamps
 
 ## Quick Start
 
@@ -32,12 +43,52 @@ npm run dev
 
 ## Scripts
 
-- `npm run dev` - Start dev server (Vite)
+- `npm run dev` - Start dev server (Vite on port 5000)
+- `npm run dev:server` - Start API server (Express on port 3000)
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run health` - Run health check
 - `npm run check-repos` - Check all repo statuses
 - `npm run agent` - Agent CLI interface
+
+## API Endpoints
+
+The Control Tower exposes a REST API on port 3000:
+
+### Core Endpoints
+- `GET /health` - Server health check
+- `GET /api/repos/health` - All repos health with GitHub data
+- `GET /api/stats` - System-wide statistics
+
+### Repository Endpoints
+- `GET /api/repos/:name` - Detailed info for specific repo
+- `GET /api/repos/:name/issues` - Open issues for repo
+- `GET /api/repos/:name/workflows` - Recent workflow runs
+
+**Example Response** (`/api/repos/health`):
+```json
+[
+  {
+    "name": "SmartFlowSite",
+    "status": "healthy",
+    "path": "/home/garet/SFS/SmartFlowSite",
+    "hasGit": true,
+    "github": {
+      "description": "SmartFlow Systems main website",
+      "stars": 0,
+      "lastCommit": {
+        "message": "Update CI/CD pipeline",
+        "date": "2025-11-19T12:00:00Z",
+        "author": "boweazy"
+      },
+      "openIssues": 2,
+      "openPRs": 1,
+      "workflowStatus": "success",
+      "language": "JavaScript"
+    }
+  }
+]
+```
 
 ### Agent CLI Commands
 
@@ -156,11 +207,32 @@ sfs-control-tower/
 - npm 9+
 
 ### Environment Variables
-Create `.env.local`:
+Create `.env` in the project root:
 ```bash
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# SFS Repositories
+SFS_BASE_PATH=/home/garet/SFS
+
+# GitHub API Integration (Required for GitHub features)
+SFS_PAT=your_github_personal_access_token
+
+# Optional: Frontend API URL (for production)
 VITE_API_URL=http://localhost:3000
-VITE_SFS_PAT=your_github_token
 ```
+
+**GitHub Token Permissions Required:**
+- `repo` (Full control of private repositories)
+- `read:org` (Read organization data)
+- `workflow` (Update GitHub Action workflows)
+
+To create a token:
+1. Go to GitHub Settings → Developer settings → Personal access tokens
+2. Generate new token (classic)
+3. Select the permissions above
+4. Copy and add to your `.env` file as `SFS_PAT`
 
 ### Local Development
 ```bash
@@ -200,8 +272,10 @@ Configured for Replit with GitHub Actions CI/CD.
 - [ ] API backend
 
 ### Phase 2 - Integration
-- [ ] Real-time repo health monitoring
-- [ ] GitHub API integration
+- [x] Real-time repo health monitoring
+- [x] GitHub API integration
+- [x] Issue tracking
+- [x] Workflow status monitoring
 - [ ] Deployment automation
 - [ ] Agent orchestration
 
