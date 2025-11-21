@@ -71,3 +71,73 @@ export const REPO_CATEGORIES: RepoCategory[] = [
     repos: ['demo-repository', 'WebsiteBuilder']
   }
 ];
+
+// Stripe billing types
+export interface StripeTransaction {
+  id: string;
+  amount: number;
+  currency: string;
+  customer: string;
+  status: string;
+  created: number;
+  description?: string;
+}
+
+export interface StripeSubscription {
+  id: string;
+  customer: string;
+  status: string;
+  plan: string;
+  amount: number;
+  currentPeriodEnd: number;
+}
+
+export interface StripeBillingOverview {
+  totalRevenue: number;
+  monthlyRecurringRevenue: number;
+  activeSubscriptions: number;
+  recentTransactions: StripeTransaction[];
+  revenueByProject: Record<string, number>;
+}
+
+// Analytics types
+export interface ProjectAnalytics {
+  name: string;
+  customers: number;
+  revenue: number;
+  activeDeployments: number;
+  healthScore: number;
+}
+
+export interface UnifiedAnalytics {
+  totalCustomers: number;
+  totalRevenue: number;
+  activeDeployments: number;
+  projectBreakdown: ProjectAnalytics[];
+}
+
+// Alert types
+export type AlertSeverity = 'critical' | 'warning' | 'info';
+
+export interface Alert {
+  id: string;
+  severity: AlertSeverity;
+  message: string;
+  repo?: string;
+  timestamp: number;
+  resolved: boolean;
+}
+
+export interface AlertsOverview {
+  critical: Alert[];
+  warnings: Alert[];
+  recentResolved: Alert[];
+}
+
+// WebSocket event types
+export interface RepoUpdateEvent {
+  type: 'repo-status' | 'ci-cd-status' | 'alert';
+  repo: string;
+  data: any;
+  timestamp: number;
+}
