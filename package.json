@@ -38,7 +38,7 @@
     "stripe": "^20.3.0"
   },
   "devDependencies": {
-    "prisma": "^7.3.0"
+    "prisma": "^7.6.0"
   },
   "engines": {
     "node": ">=18"
