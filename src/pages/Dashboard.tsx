@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { RepoGrid } from '../components/RepoGrid'
-import { AgentPanel } from '../components/AgentPanel'
 import { HealthStatus } from '../components/HealthStatus'
 
 export function Dashboard() {
@@ -29,8 +28,14 @@ export function Dashboard() {
         <div className="lg:col-span-2">
           <RepoGrid repos={repos} loading={loading} />
         </div>
-        <div>
-          <AgentPanel />
+        <div className="bg-sfs-brown/50 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-sfs-gold mb-4">
+            Safe Mode
+          </h2>
+          <p className="text-sfs-beige/80 text-sm">
+            Dashboard automation controls are disabled. This view is observe-only
+            and exposes repository status without triggering repo-changing actions.
+          </p>
         </div>
       </div>
     </div>
